@@ -1,0 +1,83 @@
+{
+    "timeout": 60,
+    "servers": [
+        {
+            "server_name": "localhost",
+            "host": "0.0.0.0",
+            "ports": [8080, 8081],
+            "default_server": true,
+            "client_max_body_size": 10485760,
+            "error_pages": {
+                "400": "error_pages/400.html",
+                "403": "error_pages/403.html",
+                "404": "error_pages/404.html",
+                "405": "error_pages/405.html",
+                "413": "error_pages/413.html",
+                "500": "error_pages/500.html"
+            },
+            "routes": [
+                {
+                    "path": "/",
+                    "methods": ["GET"],
+                    "root": "www",
+                    "default_file": "index.html",
+                    "directory_listing": false
+                },
+                {
+                    "path": "/dir_test",
+                    "methods": ["GET"],
+                    "root": "www/dir_test",
+                    "directory_listing": true
+                },
+                {
+                    "path": "/upload",
+                    "methods": ["GET", "POST", "DELETE"],
+                    "root": "www/uploads",
+                    "default_file": "upload.html",
+                    "directory_listing": true
+                },
+                {
+                    "path": "/cgi-bin",
+                    "methods": ["GET", "POST"],
+                    "root": "cgi-bin",
+                    "cgi_extension": ".py"
+                },
+                {
+                    "path": "/sh-cgi",
+                    "methods": ["GET", "POST"],
+                    "root": "cgi-bin",
+                    "cgi_extension": ".sh"
+                },
+                {
+                    "path": "/redirect",
+                    "methods": ["GET"],
+                    "redirect": "/",
+                    "redirect_code": 301
+                },
+                {
+                    "path": "/admin",
+                    "methods": ["GET"],
+                    "admin": true
+                }
+            ]
+        },
+        {
+            "server_name": "test.com",
+            "host": "0.0.0.0",
+            "ports": [8080],
+            "client_max_body_size": 5242880,
+            "error_pages": {
+                "404": "error_pages/404.html"
+            },
+            "routes": [
+                {
+                    "path": "/",
+                    "methods": ["GET"],
+                    "root": "www_test",
+                    "default_file": "index.html",
+                    "directory_listing": false
+                }
+            ]
+        }
+    ]
+}
