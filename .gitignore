@@ -1,0 +1,5 @@
+out/
+fake_git_history.sh
+auto_push.sh
+
+build_history_clean_v2.py
