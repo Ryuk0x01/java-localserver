@@ -126,3 +126,4 @@ public class StaticHandler {
         Router.sendResponse(conn, key, 200, "OK", "text/html", html.toString().getBytes(), session);
     }
 }
+
