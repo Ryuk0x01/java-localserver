@@ -1,23 +1,23 @@
 import java.util.*;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class JsonParser {
 
     private String json;
     private int pos;
 
     public JsonParser(String json) {
-        System.out.println("[DEBUG] JsonParser invoked");
         this.json = json.trim();
         this.pos = 0;
     }
 
     public Object parse() {
-        System.out.println("[DEBUG] parse invoked");
         return readValue();
     }
 
     private Object readValue() {
-        System.out.println("[DEBUG] readValue invoked");
         skipSpaces();
         char c = peek();
         if (c == '{') return readObject();
@@ -29,17 +29,13 @@ public class JsonParser {
     }
 
     private char peek() { return json.charAt(pos); }
-        System.out.println("[DEBUG] peek invoked");
     private char next() { return json.charAt(pos++); }
-        System.out.println("[DEBUG] next invoked");
 
     private void skipSpaces() {
-        System.out.println("[DEBUG] skipSpaces invoked");
         while (pos < json.length() && Character.isWhitespace(json.charAt(pos))) pos++;
     }
 
     private Map<String, Object> readObject() {
-        System.out.println("[DEBUG] readObject invoked");
         Map<String, Object> map = new LinkedHashMap<>();
         next();
         skipSpaces();
@@ -61,7 +57,6 @@ public class JsonParser {
     }
 
     private List<Object> readArray() {
-        System.out.println("[DEBUG] readArray invoked");
         List<Object> list = new ArrayList<>();
         next();
         skipSpaces();
@@ -78,7 +73,6 @@ public class JsonParser {
     }
 
     private String readString() {
-        System.out.println("[DEBUG] readString invoked");
         next();
         StringBuilder sb = new StringBuilder();
         while (peek() != '"') {
@@ -103,7 +97,6 @@ public class JsonParser {
     }
 
     private Number readNumber() {
-        System.out.println("[DEBUG] readNumber invoked");
         int start = pos;
         if (peek() == '-') pos++;
         while (pos < json.length() && (Character.isDigit(peek()) || peek() == '.')) pos++;
@@ -113,14 +106,12 @@ public class JsonParser {
     }
 
     private Boolean readBoolean() {
-        System.out.println("[DEBUG] readBoolean invoked");
         if (json.startsWith("true", pos)) { pos += 4; return true; }
         pos += 5;
         return false;
     }
 
     private Object readNull() {
-        System.out.println("[DEBUG] readNull invoked");
         pos += 4;
         return null;
     }
