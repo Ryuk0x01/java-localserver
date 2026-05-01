@@ -1,8 +1,5 @@
 import java.util.*;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class JsonParser {
 
     private String json;
