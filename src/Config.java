@@ -2,13 +2,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Config {
     public static int timeout = 60;
     public static List<Map<String, Object>> servers = new ArrayList<>();
     public static Set<Integer> allPorts = new LinkedHashSet<>();
 
     public static void loadConfig(String path) {
-        System.out.println("[DEBUG] loadConfig invoked");
         try {
             String content = new String(Files.readAllBytes(Paths.get(path)));
             JsonParser parser = new JsonParser(content);
@@ -81,7 +83,6 @@ public class Config {
     }
 
     public static Map<String, Object> findServer(String hostHeader, int port) {
-        System.out.println("[DEBUG] findServer invoked");
         String hostname = "";
         if (hostHeader != null) {
             hostname = hostHeader.contains(":") ? hostHeader.substring(0, hostHeader.indexOf(":")) : hostHeader;
@@ -121,17 +122,14 @@ public class Config {
     }
 
     public static int getMaxBodySize(Map<String, Object> server) {
-        System.out.println("[DEBUG] getMaxBodySize invoked");
         return ((Number) server.getOrDefault("client_max_body_size", 1048576)).intValue();
     }
 
     public static Map<String, Object> getErrorPages(Map<String, Object> server) {
-        System.out.println("[DEBUG] getErrorPages invoked");
         return (Map<String, Object>) server.getOrDefault("error_pages", new HashMap<>());
     }
 
     public static List<Map<String, Object>> getRoutes(Map<String, Object> server) {
-        System.out.println("[DEBUG] getRoutes invoked");
         return (List<Map<String, Object>>) server.getOrDefault("routes", new ArrayList<>());
     }
 }
