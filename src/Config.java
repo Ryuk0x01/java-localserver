@@ -8,6 +8,7 @@ public class Config {
     public static Set<Integer> allPorts = new LinkedHashSet<>();
 
     public static void loadConfig(String path) {
+        System.out.println("[DEBUG] loadConfig invoked");
         try {
             String content = new String(Files.readAllBytes(Paths.get(path)));
             JsonParser parser = new JsonParser(content);
@@ -51,4 +52,87 @@ public class Config {
 
                 if (hasDupe) {
                     System.err.println("Skipping server '" + server.get("server_name") + "' due to config error");
-}}}}}
+                    continue;
+                }
+
+                // validate body size
+                if (!server.containsKey("client_max_body_size")) {
+                    server.put("client_max_body_size", 1048576L);
+                }
+
+                servers.add(server);
+                for (Object p : ports) {
+                    allPorts.add(((Number) p).intValue());
+                }
+            }
+
+            if (servers.isEmpty()) {
+                System.err.println("Error: no valid servers after config validation");
+                System.exit(1);
+            }
+
+            System.out.println("Config loaded: " + servers.size() + " server(s), ports: " + allPorts);
+
+        } catch (Exception e) {
+            System.err.println("Failed to load config: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public static Map<String, Object> findServer(String hostHeader, int port) {
+        System.out.println("[DEBUG] findServer invoked");
+        String hostname = "";
+        if (hostHeader != null) {
+            hostname = hostHeader.contains(":") ? hostHeader.substring(0, hostHeader.indexOf(":")) : hostHeader;
+        }
+
+        // exact match: server_name + port
+        for (Map<String, Object> server : servers) {
+            String name = (String) server.getOrDefault("server_name", "");
+            List<Object> ports = (List<Object>) server.get("ports");
+            boolean hasPort = false;
+            for (Object p : ports) if (((Number) p).intValue() == port) hasPort = true;
+
+            if (hasPort && name.equalsIgnoreCase(hostname)) {
+                return server;
+            }
+        }
+
+        // fallback: default_server that has this port
+        for (Map<String, Object> server : servers) {
+            Boolean isDefault = (Boolean) server.getOrDefault("default_server", false);
+            List<Object> ports = (List<Object>) server.get("ports");
+            boolean hasPort = false;
+            for (Object p : ports) if (((Number) p).intValue() == port) hasPort = true;
+
+            if (hasPort && isDefault) return server;
+        }
+
+        // fallback: first server with this port
+        for (Map<String, Object> server : servers) {
+            List<Object> ports = (List<Object>) server.get("ports");
+            for (Object p : ports) {
+                if (((Number) p).intValue() == port) return server;
+            }
+        }
+
+        return servers.get(0);
+    }
+
+    public static int getMaxBodySize(Map<String, Object> server) {
+        System.out.println("[DEBUG] getMaxBodySize invoked");
+        return ((Number) server.getOrDefault("client_max_body_size", 1048576)).intValue();
+    }
+
+    public static Map<String, Object> getErrorPages(Map<String, Object> server) {
+        System.out.println("[DEBUG] getErrorPages invoked");
+        return (Map<String, Object>) server.getOrDefault("error_pages", new HashMap<>());
+    }
+
+    public static List<Map<String, Object>> getRoutes(Map<String, Object> server) {
+        System.out.println("[DEBUG] getRoutes invoked");
+        return (List<Map<String, Object>>) server.getOrDefault("routes", new ArrayList<>());
+    }
+}
+
