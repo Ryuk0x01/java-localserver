@@ -2,9 +2,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Config {
     public static int timeout = 60;
     public static List<Map<String, Object>> servers = new ArrayList<>();
