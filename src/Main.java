@@ -1,6 +1,8 @@
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("[DEBUG] main invoked");
         // Load the config first
         Config.loadConfig("config.json");
         
