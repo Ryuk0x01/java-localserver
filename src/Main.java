@@ -1,6 +1,3 @@
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Main {
     public static void main(String[] args) {
         // Load the config first
