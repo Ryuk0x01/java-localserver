@@ -5,9 +5,6 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Server {
 
     private Selector selector;
