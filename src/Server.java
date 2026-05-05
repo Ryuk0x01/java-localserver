@@ -5,13 +5,15 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Server {
 
     private Selector selector;
     private List<ServerSocketChannel> serverChannels = new ArrayList<>();
 
     public void start() {
-        System.out.println("[DEBUG] start invoked");
         try {
             selector = Selector.open();
 
