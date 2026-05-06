@@ -5,6 +5,9 @@ import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Connection {
     public SocketChannel channel;
     public ByteBuffer readBuffer;
@@ -29,7 +32,6 @@ public class Connection {
     public File cgiInputFile;
 
     public Connection(SocketChannel channel, int localPort) {
-        System.out.println("[DEBUG] Connection invoked");
         this.channel = channel;
         this.localPort = localPort;
         this.readBuffer = ByteBuffer.allocate(16384);
@@ -37,12 +39,10 @@ public class Connection {
     }
 
     public void updateActivity() {
-        System.out.println("[DEBUG] updateActivity invoked");
         this.lastActive = System.currentTimeMillis();
     }
 
     public void reset() {
-        System.out.println("[DEBUG] reset invoked");
         headersParsed = false;
         method = null;
         path = null;
