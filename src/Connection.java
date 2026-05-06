@@ -5,9 +5,6 @@ import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Connection {
     public SocketChannel channel;
     public ByteBuffer readBuffer;
