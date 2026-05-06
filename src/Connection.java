@@ -24,4 +24,44 @@ public class Connection {
     public boolean chunked = false;
     public ByteArrayOutputStream chunkedBody;
 
+    public Process cgiProcess;
+    public File cgiOutputFile;
+    public File cgiInputFile;
+
+    public Connection(SocketChannel channel, int localPort) {
+        System.out.println("[DEBUG] Connection invoked");
+        this.channel = channel;
+        this.localPort = localPort;
+        this.readBuffer = ByteBuffer.allocate(16384);
+        this.lastActive = System.currentTimeMillis();
+    }
+
+    public void updateActivity() {
+        System.out.println("[DEBUG] updateActivity invoked");
+        this.lastActive = System.currentTimeMillis();
+    }
+
+    public void reset() {
+        System.out.println("[DEBUG] reset invoked");
+        headersParsed = false;
+        method = null;
+        path = null;
+        queryString = "";
+        protocol = null;
+        headers.clear();
+        body = null;
+        bodyBytesRead = 0;
+        contentLength = 0;
+        chunked = false;
+        chunkedBody = null;
+        cgiProcess = null;
+        cgiOutputFile = null;
+        cgiInputFile = null;
+        readBuffer.clear();
+        writeBuffer = null;
+    }
 }
+
+
+
+
