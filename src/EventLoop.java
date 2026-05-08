@@ -9,6 +9,9 @@ import java.util.Map;
 import utils.Cookie;
 import utils.Session;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class EventLoop {
 
     private Selector selector;
@@ -16,12 +19,10 @@ public class EventLoop {
     private List<Connection> pendingCGI = new ArrayList<>();
 
     public EventLoop(Selector selector) {
-        System.out.println("[DEBUG] EventLoop invoked");
         this.selector = selector;
     }
 
     public void run() {
-        System.out.println("[DEBUG] run invoked");
         System.out.println("Starting event loop...");
         while (true) {
             try {
@@ -59,7 +60,6 @@ public class EventLoop {
     }
 
     private void acceptConnection(SelectionKey key) {
-        System.out.println("[DEBUG] acceptConnection invoked");
         try {
             ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
             SocketChannel clientChannel = serverChannel.accept();
@@ -77,7 +77,6 @@ public class EventLoop {
     }
 
     private void readData(SelectionKey key) {
-        System.out.println("[DEBUG] readData invoked");
         Connection conn = (Connection) key.attachment();
         try {
             conn.updateActivity();
@@ -97,7 +96,6 @@ public class EventLoop {
     }
 
     private void writeData(SelectionKey key) {
-        System.out.println("[DEBUG] writeData invoked");
         Connection conn = (Connection) key.attachment();
         try {
             conn.updateActivity();
@@ -115,7 +113,6 @@ public class EventLoop {
     }
 
     private void checkTimeouts() {
-        System.out.println("[DEBUG] checkTimeouts invoked");
         long now = System.currentTimeMillis();
         long timeoutMs = Config.timeout * 1000L;
 
@@ -133,7 +130,6 @@ public class EventLoop {
     }
 
     private void checkCGI() {
-        System.out.println("[DEBUG] checkCGI invoked");
         Iterator<Connection> it = pendingCGI.iterator();
         while (it.hasNext()) {
             Connection conn = it.next();
@@ -168,12 +164,10 @@ public class EventLoop {
     }
 
     public void addPendingCGI(Connection conn) {
-        System.out.println("[DEBUG] addPendingCGI invoked");
         pendingCGI.add(conn);
     }
 
     public void closeConnection(Connection conn, SelectionKey key) {
-        System.out.println("[DEBUG] closeConnection invoked");
         try { conn.channel.close(); } catch (Exception e) {}
         if (key != null) key.cancel();
         connections.remove(conn);
