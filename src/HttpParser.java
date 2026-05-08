@@ -2,10 +2,12 @@ import java.io.ByteArrayOutputStream;
 import java.nio.channels.SelectionKey;
 import java.util.Map;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class HttpParser {
 
     public static void parse(Connection conn, SelectionKey key) {
-        System.out.println("[DEBUG] parse invoked");
         conn.readBuffer.flip();
 
         try {
@@ -128,7 +130,6 @@ public class HttpParser {
     }
 
     private static boolean readChunkedBody(Connection conn) {
-        System.out.println("[DEBUG] readChunkedBody invoked");
         try {
             while (conn.readBuffer.hasRemaining()) {
                 int lineEnd = findLineEnd(conn.readBuffer, conn.readBuffer.position());
@@ -169,7 +170,6 @@ public class HttpParser {
     }
 
     private static int findHeaderEnd(java.nio.ByteBuffer buffer) {
-        System.out.println("[DEBUG] findHeaderEnd invoked");
         int pos = buffer.position();
         for (int i = pos; i < buffer.limit() - 3; i++) {
             if (buffer.get(i) == '\r' && buffer.get(i + 1) == '\n' &&
@@ -181,7 +181,6 @@ public class HttpParser {
     }
 
     private static int findLineEnd(java.nio.ByteBuffer buffer, int from) {
-        System.out.println("[DEBUG] findLineEnd invoked");
         for (int i = from; i < buffer.limit() - 1; i++) {
             if (buffer.get(i) == '\r' && buffer.get(i + 1) == '\n') {
                 return i;
