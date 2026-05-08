@@ -2,9 +2,6 @@ import java.io.ByteArrayOutputStream;
 import java.nio.channels.SelectionKey;
 import java.util.Map;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class HttpParser {
 
     public static void parse(Connection conn, SelectionKey key) {
