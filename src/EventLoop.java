@@ -9,9 +9,6 @@ import java.util.Map;
 import utils.Cookie;
 import utils.Session;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class EventLoop {
 
     private Selector selector;
