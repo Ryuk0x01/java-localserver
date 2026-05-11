@@ -7,9 +7,6 @@ import java.util.List;
 import utils.Cookie;
 import utils.Session;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Router {
 
     private static EventLoop eventLoop;
