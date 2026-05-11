@@ -7,17 +7,18 @@ import java.util.List;
 import utils.Cookie;
 import utils.Session;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Router {
 
     private static EventLoop eventLoop;
 
     public static void setEventLoop(EventLoop loop) {
-        System.out.println("[DEBUG] setEventLoop invoked");
         eventLoop = loop;
     }
 
     public static void route(Connection conn, SelectionKey key) {
-        System.out.println("[DEBUG] route invoked");
         Metrics.recordRequest();
 
         // find the right server based on Host header
@@ -106,12 +107,10 @@ public class Router {
     }
 
     public static void sendError(Connection conn, SelectionKey key, int statusCode, String statusText) {
-        System.out.println("[DEBUG] sendError invoked");
         sendError(conn, key, statusCode, statusText, null);
     }
 
     public static void sendError(Connection conn, SelectionKey key, int statusCode, String statusText, Map<String, Object> server) {
-        System.out.println("[DEBUG] sendError invoked");
         Metrics.recordStatus(statusCode);
         byte[] body;
 
@@ -132,7 +131,6 @@ public class Router {
     }
 
     public static void sendRedirect(Connection conn, SelectionKey key, String location, int statusCode) {
-        System.out.println("[DEBUG] sendRedirect invoked");
         Metrics.recordStatus(statusCode);
         String response = "HTTP/1.1 " + statusCode + " Redirect\r\n" +
                           "Location: " + location + "\r\n" +
