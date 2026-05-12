@@ -8,10 +8,12 @@ import java.io.FileOutputStream;
 import utils.Session;
 import utils.Cookie;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class StaticHandler {
 
     public static void handle(Connection conn, SelectionKey key, Map<String, Object> route, Map<String, Object> server) {
-        System.out.println("[DEBUG] handle invoked");
         String root = (String) route.get("root");
         if (root == null) root = ".";
 
@@ -85,7 +87,6 @@ public class StaticHandler {
     }
 
     private static void serveFile(Connection conn, SelectionKey key, File file, Session session) {
-        System.out.println("[DEBUG] serveFile invoked");
         try {
             byte[] content = Files.readAllBytes(file.toPath());
             String contentType = "application/octet-stream";
@@ -107,7 +108,6 @@ public class StaticHandler {
     }
 
     private static void serveDirectoryListing(Connection conn, SelectionKey key, File dir, String path, Session session) {
-        System.out.println("[DEBUG] serveDirectoryListing invoked");
         StringBuilder html = new StringBuilder();
         html.append("<html><head><title>Index of ").append(path).append("</title></head><body>");
         html.append("<h1>Index of ").append(path).append("</h1><hr><pre>");
