@@ -8,9 +8,6 @@ import java.io.FileOutputStream;
 import utils.Session;
 import utils.Cookie;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class StaticHandler {
 
     public static void handle(Connection conn, SelectionKey key, Map<String, Object> route, Map<String, Object> server) {
