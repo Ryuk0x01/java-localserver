@@ -5,9 +5,6 @@ import java.nio.file.Paths;
 import java.nio.channels.SelectionKey;
 import java.util.Map;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class CGIHandler {
 
     public static void handle(Connection conn, SelectionKey key, Map<String, Object> route, EventLoop loop) {
