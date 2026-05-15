@@ -3,10 +3,12 @@ package utils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Cookie {
     
     public static Map<String, String> parse(String cookieHeader) {
-        System.out.println("[DEBUG] parse invoked");
         Map<String, String> cookies = new HashMap<>();
         if (cookieHeader == null || cookieHeader.isEmpty()) {
             return cookies;
