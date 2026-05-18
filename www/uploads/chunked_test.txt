@@ -1,2 +1,1 @@
-# WIP: refining chunked_test.txt
 Hello World
