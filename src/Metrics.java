@@ -1,9 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * TODO: Refactor and optimize connection handling and edge cases.
- */
 public class Metrics {
     public static long totalRequests = 0;
     public static long startTime = System.currentTimeMillis();

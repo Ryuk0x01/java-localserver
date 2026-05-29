@@ -1,4 +1,3 @@
-# WIP: refining hello.sh
 #!/bin/sh
 echo "Content-Type: text/html"
 echo ""
