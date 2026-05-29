@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TODO: Refactor and optimize connection handling and edge cases.
+ */
 public class Metrics {
     public static long totalRequests = 0;
     public static long startTime = System.currentTimeMillis();
@@ -8,17 +11,14 @@ public class Metrics {
     public static Map<Integer, Long> statusCodes = new HashMap<>();
 
     public static void recordRequest() {
-        System.out.println("[DEBUG] recordRequest invoked");
         totalRequests++;
     }
 
     public static void recordStatus(int code) {
-        System.out.println("[DEBUG] recordStatus invoked");
         statusCodes.merge(code, 1L, Long::sum);
     }
 
     public static String toJson() {
-        System.out.println("[DEBUG] toJson invoked");
         long uptime = (System.currentTimeMillis() - startTime) / 1000;
         StringBuilder sb = new StringBuilder();
         sb.append("{");
@@ -37,7 +37,6 @@ public class Metrics {
     }
 
     public static String toHtml() {
-        System.out.println("[DEBUG] toHtml invoked");
         long uptime = (System.currentTimeMillis() - startTime) / 1000;
         long hours = uptime / 3600;
         long mins = (uptime % 3600) / 60;
