@@ -1,4 +1,3 @@
-# WIP: refining test_siege.sh
 #!/bin/bash
 
 # Define colors for output

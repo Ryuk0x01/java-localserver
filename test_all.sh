@@ -1,4 +1,3 @@
-# WIP: refining test_all.sh
 #!/bin/bash
 
 # Define colors for output
