@@ -1,4 +1,3 @@
-# WIP: refining Metrics.md
 # Metrics.java — Server Dashboard
 
 📄 **File:** `src/Metrics.java`

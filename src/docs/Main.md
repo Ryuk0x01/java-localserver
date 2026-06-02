@@ -1,4 +1,3 @@
-# WIP: refining Main.md
 # Main.java — The Entry Point
 
 📄 **File:** `src/Main.java`

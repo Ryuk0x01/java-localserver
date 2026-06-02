@@ -1,4 +1,3 @@
-# WIP: refining config.md
 # config.json — Server Configuration
 
 📄 **File:** `config.json`

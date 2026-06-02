@@ -1,4 +1,3 @@
-# WIP: refining Connection.md
 # Connection.java — One Client's State
 
 📄 **File:** `src/Connection.java`

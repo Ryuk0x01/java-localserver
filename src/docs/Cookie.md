@@ -1,4 +1,3 @@
-# WIP: refining Cookie.md
 # Cookie.java — Reading Cookies
 
 📄 **File:** `src/utils/Cookie.java`

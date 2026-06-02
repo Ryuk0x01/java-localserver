@@ -1,4 +1,3 @@
-# WIP: refining StaticHandler.md
 # StaticHandler.java — Serving Files
 
 📄 **File:** `src/StaticHandler.java`

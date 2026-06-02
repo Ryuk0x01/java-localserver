@@ -1,4 +1,3 @@
-# WIP: refining Router.md
 # Router.java — Traffic Controller
 
 📄 **File:** `src/Router.java`

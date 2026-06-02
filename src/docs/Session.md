@@ -1,4 +1,3 @@
-# WIP: refining Session.md
 # Session.java — Remembering Users
 
 📄 **File:** `src/utils/Session.java`

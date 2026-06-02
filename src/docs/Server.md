@@ -1,4 +1,3 @@
-# WIP: refining Server.md
 # Server.java — Opening the Ports
 
 📄 **File:** `src/Server.java`
